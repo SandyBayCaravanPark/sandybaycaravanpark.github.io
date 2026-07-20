@@ -6,9 +6,15 @@
       "name": "ABI New Horizon",
       "price": 24995,
       "status": "for-sale",
-      "specs": ["35ft × 12ft", "3 bed", "Sleeps 8"],
+      "specs": [
+        "35ft × 12ft",
+        "3 bed",
+        "Sleeps 8"
+      ],
       "blurb": "Double glazed and centrally heated, with an open-plan lounge, a fully equipped kitchen, and a master plus two twin bedrooms. A solid, spacious starter home.",
-      "photos": ["https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_358284577.jpg"],
+      "photos": [
+        "https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_358284577.jpg"
+      ],
       "videoId": ""
     },
     {
@@ -16,9 +22,14 @@
       "name": "Delta Sapphire",
       "price": 24995,
       "status": "for-sale",
-      "specs": ["35ft × 12ft", "2 bed"],
+      "specs": [
+        "35ft × 12ft",
+        "2 bed"
+      ],
       "blurb": "A stylish, energy-efficient two-bedroom home with an L-shaped lounge, gas fire, and a bright, contemporary kitchen-diner. Ideal for couples or a small family.",
-      "photos": ["https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_570797225.jpg"],
+      "photos": [
+        "https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_570797225.jpg"
+      ],
       "videoId": ""
     },
     {
@@ -26,9 +37,14 @@
       "name": "Atlas Moonstone",
       "price": 27995,
       "status": "for-sale",
-      "specs": ["36ft × 12ft", "3 bed"],
+      "specs": [
+        "36ft × 12ft",
+        "3 bed"
+      ],
       "blurb": "Our largest caravan currently for sale. Light and airy throughout, with a separate toilet alongside the main bathroom — a genuinely spacious family layout.",
-      "photos": ["https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_927395202.jpg"],
+      "photos": [
+        "https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_927395202.jpg"
+      ],
       "videoId": ""
     },
     {
@@ -36,9 +52,14 @@
       "name": "Delta Santana",
       "price": 19995,
       "status": "for-sale",
-      "specs": ["2 bed", "Great value"],
+      "specs": [
+        "2 bed",
+        "Great value"
+      ],
       "blurb": "One double, one twin, double glazing and central heating throughout. Simple, low-maintenance, and move-in ready — our best value on the park right now.",
-      "photos": ["https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_811346224.jpg"],
+      "photos": [
+        "https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_811346224.jpg"
+      ],
       "videoId": ""
     },
     {
@@ -46,9 +67,14 @@
       "name": "Willerby Lymington",
       "price": 24995,
       "status": "for-sale",
-      "specs": ["32ft × 12ft", "2 bed"],
+      "specs": [
+        "32ft × 12ft",
+        "2 bed"
+      ],
       "blurb": "A smart, family-friendly layout with built-in bedroom storage and a bright lounge. Available now and ready to move straight into.",
-      "photos": ["https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_789160.jpg"],
+      "photos": [
+        "https://cms.pm/uploads/images/big/sandybaycaravanpark.co.uk_--_789160.jpg"
+      ],
       "videoId": ""
     }
   ]
