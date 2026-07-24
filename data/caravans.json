@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-20",
+  "updated": "2026-07-24",
   "caravans": [
     {
       "id": "abi-new-horizon",
       "name": "ABI New Horizon",
-      "price": 24995,
+      "price": 19995,
       "status": "for-sale",
       "specs": [
         "35ft × 12ft",
@@ -13,14 +13,14 @@
       ],
       "blurb": "Double glazed and centrally heated, with an open-plan lounge, a fully equipped kitchen, and a master plus two twin bedrooms. A solid, spacious starter home.",
       "photos": [
-        "images/caravans/abi-new-horizon/photo_1784559310973_rot.jpg"
+        "https://sandybaycaravanpark.github.io/images/caravans/abi-new-horizon/photo_1784559310973_rot.jpg"
       ],
       "videoId": ""
     },
     {
       "id": "delta-sapphire",
       "name": "Delta Sapphire",
-      "price": 24995,
+      "price": 19995,
       "status": "for-sale",
       "specs": [
         "35ft × 12ft",
@@ -28,14 +28,14 @@
       ],
       "blurb": "A stylish, energy-efficient two-bedroom home with an L-shaped lounge, gas fire, and a bright, contemporary kitchen-diner. Ideal for couples or a small family.",
       "photos": [
-        "images/caravans/delta-sapphire/photo_1784559328122_rot.jpg"
+        "https://sandybaycaravanpark.github.io/images/caravans/delta-sapphire/photo_1784559328122_rot.jpg"
       ],
       "videoId": ""
     },
     {
       "id": "atlas-moonstone",
       "name": "Atlas Moonstone",
-      "price": 27995,
+      "price": 21995,
       "status": "for-sale",
       "specs": [
         "36ft × 12ft",
@@ -50,7 +50,7 @@
     {
       "id": "delta-santana",
       "name": "Delta Santana",
-      "price": 19995,
+      "price": 16995,
       "status": "for-sale",
       "specs": [
         "2 bed",
@@ -65,7 +65,7 @@
     {
       "id": "willerby-lymington",
       "name": "Willerby Lymington",
-      "price": 24995,
+      "price": 19995,
       "status": "for-sale",
       "specs": [
         "32ft × 12ft",
