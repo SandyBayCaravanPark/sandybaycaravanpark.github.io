@@ -446,16 +446,21 @@
         <div class="contact-line"><span class="k">Address</span><span>Sandy Bay Caravan Park Limited<br>Sandbank Road, Abergele<br>Conwy, LL22 9LB</span></div>
         <div class="contact-line"><span class="k">Phone</span><a href="tel:01745345054">01745 345 054</a></div>
         <div class="contact-line"><span class="k">Mobile</span><a href="tel:07766146154">07766 146 154</a></div>
+        <div class="contact-line"><span class="k">Email</span><a href="mailto:sales@sandybaycaravanpark.co.uk">sales@sandybaycaravanpark.co.uk</a></div>
         <a class="fb-link" href="https://www.facebook.com/SandyBayCaravanParkLtd/" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.4H15c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0022 12z"/></svg>
           Follow us on Facebook
         </a>
       </div>
       <div class="reveal">
-        <form class="enquiry" id="enquiryForm">
-          <div class="field"><label for="fname">Name</label><input id="fname" type="text" required></div>
-          <div class="field"><label for="femail">Email</label><input id="femail" type="email" required></div>
-          <div class="field"><label for="fmsg">Your message</label><textarea id="fmsg" required placeholder="Tell us which caravan you're interested in, or what you'd like to know."></textarea></div>
+        <form class="enquiry" id="enquiryForm" action="https://formsubmit.co/sales@sandybaycaravanpark.co.uk" method="POST">
+          <input type="hidden" name="_subject" value="Website enquiry — Sandy Bay Caravan Park">
+          <input type="hidden" name="_next" value="https://sandybaycaravanpark.co.uk/?sent=1#contact">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="field"><label for="fname">Name</label><input id="fname" name="name" type="text" required></div>
+          <div class="field"><label for="femail">Email</label><input id="femail" name="email" type="email" required></div>
+          <div class="field"><label for="fmsg">Your message</label><textarea id="fmsg" name="message" required placeholder="Tell us which caravan you're interested in, or what you'd like to know."></textarea></div>
           <button type="submit" class="btn btn-primary">Send enquiry</button>
         </form>
         <div class="form-thanks" id="formThanks">
@@ -517,12 +522,14 @@
     revealEls.forEach(el=>el.classList.add('in'));
   }
 
-  const form = document.getElementById('enquiryForm');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
+  // The enquiry form posts to FormSubmit, which emails it to the park's
+  // sales address, then sends the visitor back here with ?sent=1 — at
+  // which point we show the thank-you card instead of the form.
+  if(new URLSearchParams(location.search).has('sent')){
+    const form = document.getElementById('enquiryForm');
     form.style.display = 'none';
     document.getElementById('formThanks').classList.add('show');
-  });
+  }
 
   /* ---------- Listings & videos, rendered from data files ----------
      Content lives in data/caravans.json and data/videos.json.
