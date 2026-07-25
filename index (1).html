@@ -135,7 +135,7 @@
     display:flex; flex-direction:column; transition:transform .18s ease, box-shadow .18s ease;
   }
   .caravan-card:hover{ transform:translateY(-4px); box-shadow:0 18px 34px rgba(0,0,0,0.28); }
-  .caravan-photo{ position:relative; aspect-ratio:4/3; overflow:hidden; background:#ccc; }
+  .caravan-photo{ position:relative; aspect-ratio:4/3; overflow:hidden; background:#ccc; cursor:pointer; }
   .caravan-photo img{ width:100%; height:100%; object-fit:cover; }
   .price-tag{
     position:absolute; top:14px; right:-6px; background:var(--gorse); color:var(--navy-deep);
@@ -225,6 +225,41 @@
   .contact-line .k{ color:#7A8A8E; min-width:70px; font-size:12.5px; text-transform:uppercase; letter-spacing:0.05em; font-family:'Space Mono',monospace; padding-top:2px; }
   .contact-line a{ text-decoration:none; font-weight:600; }
   .fb-link{ display:inline-flex; align-items:center; gap:8px; margin-top:18px; font-size:14px; font-weight:600; text-decoration:none; color:var(--teal-deep); }
+  .wa-link{ margin-top:10px; color:#2E7D5B; }
+
+  /* ---------- Caravan detail modal ---------- */
+  .cvn-modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(13,26,32,0.75); z-index:200;
+    align-items:flex-start; justify-content:center; padding:40px 20px; overflow-y:auto;
+  }
+  .cvn-modal-overlay.open{ display:flex; }
+  .cvn-modal{
+    background:var(--foam); color:var(--ink); border-radius:10px; max-width:920px; width:100%;
+    position:relative; overflow:hidden; display:grid; grid-template-columns:1fr 1.15fr;
+    box-shadow:0 30px 70px rgba(0,0,0,0.4);
+  }
+  .cvn-modal-close{
+    position:absolute; top:12px; right:12px; z-index:2; width:34px; height:34px; border-radius:50%;
+    border:none; background:rgba(13,26,32,0.75); color:#fff; font-size:16px; cursor:pointer; line-height:1;
+  }
+  .cvn-modal-gallery{ background:#0D1A20; display:flex; flex-direction:column; }
+  .cvn-modal-main-photo{ aspect-ratio:4/3; background:#ccc; }
+  .cvn-modal-main-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .cvn-modal-thumbs{ display:flex; gap:6px; padding:8px; overflow-x:auto; }
+  .cvn-modal-thumbs img{ width:56px; height:42px; object-fit:cover; border-radius:4px; cursor:pointer; opacity:0.55; flex:none; }
+  .cvn-modal-thumbs img.active{ opacity:1; outline:2px solid var(--gorse); }
+  .cvn-modal-body{ padding:26px 26px 30px; overflow-y:auto; max-height:88vh; }
+  .cvn-modal-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:6px; }
+  .cvn-modal-head h3{ font-size:22px; }
+  .cvn-modal-price{ font-family:'Space Mono',monospace; font-weight:700; color:var(--teal-deep); font-size:18px; white-space:nowrap; padding-top:3px; }
+  .cvn-modal-specs{ display:flex; gap:12px; font-family:'Space Mono',monospace; font-size:12.5px; color:var(--teal-deep); flex-wrap:wrap; margin-bottom:14px; }
+  .cvn-modal-blurb{ font-size:15px; color:#3A4448; margin:0 0 18px; }
+  .cvn-modal-video{ margin-bottom:20px; }
+  .cvn-modal-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
+  .cvn-modal-actions .btn{ color:var(--ink); border-color:var(--line); background:#fff; }
+  .cvn-modal-actions .btn:hover{ background:var(--foam-dim); }
+  .cvn-modal-enquire-title{ font-size:15px; margin-bottom:10px; }
+  @media (max-width:760px){ .cvn-modal{ grid-template-columns:1fr; } }
 
   form.enquiry{ display:flex; flex-direction:column; gap:14px; }
   .field{ display:flex; flex-direction:column; gap:6px; }
@@ -451,6 +486,11 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.4H15c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0022 12z"/></svg>
           Follow us on Facebook
         </a>
+        <br>
+        <a class="fb-link wa-link" id="contactWhatsappLink" href="#" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.87.5 3.7 1.44 5.31L2 22l4.9-1.54a9.86 9.86 0 0 0 5.14 1.44h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.05 2h-.01Zm5.8 14.1c-.24.68-1.18 1.24-1.94 1.4-.53.11-1.22.2-3.55-.76-2.98-1.23-4.9-4.23-5.05-4.43-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.17 1.03-2.47.27-.3.6-.37.8-.37.2 0 .4 0 .58.01.19.01.44-.07.68.53.25.6.85 2.06.92 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.3.38-.44.51-.15.14-.3.3-.13.6.17.3.76 1.26 1.64 2.05 1.13 1 2.08 1.31 2.38 1.46.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.24.66-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.08.13.08.73-.16 1.4Z"/></svg>
+          Message us on WhatsApp
+        </a>
       </div>
       <div class="reveal">
         <form class="enquiry" id="enquiryForm" action="https://formsubmit.co/sales@sandybaycaravanpark.co.uk" method="POST">
@@ -501,6 +541,42 @@
     </div>
   </div>
 </footer>
+
+<div class="cvn-modal-overlay" id="cvnModalOverlay">
+  <div class="cvn-modal" role="dialog" aria-modal="true" aria-label="Caravan details">
+    <button class="cvn-modal-close" id="cvnModalClose" aria-label="Close">✕</button>
+    <div class="cvn-modal-gallery">
+      <div class="cvn-modal-main-photo"><img id="cvnModalMainPhoto" src="" alt=""></div>
+      <div class="cvn-modal-thumbs" id="cvnModalThumbs"></div>
+    </div>
+    <div class="cvn-modal-body">
+      <div class="cvn-modal-head">
+        <h3 id="cvnModalName"></h3>
+        <div class="cvn-modal-price" id="cvnModalPrice"></div>
+      </div>
+      <div class="cvn-modal-specs" id="cvnModalSpecs"></div>
+      <p class="cvn-modal-blurb" id="cvnModalBlurb"></p>
+      <div class="cvn-modal-video" id="cvnModalVideoWrap" style="display:none;">
+        <div class="video-frame" id="cvnModalVideoFrame"></div>
+      </div>
+      <div class="cvn-modal-actions">
+        <a class="btn" id="cvnModalWhatsapp" href="#" target="_blank" rel="noopener">💬 Ask on WhatsApp</a>
+        <a class="btn" id="cvnModalCall" href="#">📞 Call us</a>
+      </div>
+      <h4 class="cvn-modal-enquire-title">Send an enquiry about this caravan</h4>
+      <form class="enquiry" id="cvnModalForm" action="https://formsubmit.co/sales@sandybaycaravanpark.co.uk" method="POST">
+        <input type="hidden" name="_subject" id="cvnModalSubject" value="Website enquiry — Sandy Bay Caravan Park">
+        <input type="hidden" name="_next" value="https://sandybaycaravanpark.co.uk/?sent=1#contact">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="field"><label for="cvnFname">Name</label><input id="cvnFname" name="name" type="text" required></div>
+        <div class="field"><label for="cvnFemail">Email</label><input id="cvnFemail" name="email" type="email" required></div>
+        <div class="field"><label for="cvnFmsg">Your message</label><textarea id="cvnModalMessage" name="message" required></textarea></div>
+        <button type="submit" class="btn btn-primary">Send enquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script>
   const toggle = document.getElementById('menuToggle');
@@ -555,6 +631,16 @@
   const ph = () => (window.SETTINGS && window.SETTINGS.phone) || SETTINGS_FALLBACK.phone;
   const phTel = () => 'tel:' + ph().replace(/\s+/g, '');
 
+  // Builds a WhatsApp "click to chat" link — no account or app setup needed
+  // beyond the office phone already being on WhatsApp. UK mobiles are
+  // written with a leading 0 locally, but WhatsApp wants the number in full
+  // international form (44 in place of that leading 0).
+  function waLink(mobile, text){
+    const digits = String(mobile || '').replace(/\D/g, '').replace(/^0/, '44');
+    if(!digits) return '#';
+    return 'https://wa.me/' + digits + (text ? ('?text=' + encodeURIComponent(text)) : '');
+  }
+
   function applySiteDetails(s){
     window.SETTINGS = s;
     const telHref = (n) => 'tel:' + String(n || '').replace(/\s+/g, '');
@@ -567,6 +653,8 @@
     setLink('contactMobileLink', s.mobile, telHref(s.mobile));
     setLink('thanksPhoneLink', s.phone, telHref(s.phone));
     setLink('footerPhoneLink', s.phone, telHref(s.phone));
+    const cWa = document.getElementById('contactWhatsappLink');
+    if(cWa) cWa.href = waLink(s.mobile, "Hi, I'd like to ask about a caravan at Sandy Bay Caravan Park.");
     const addr = document.getElementById('contactAddressEl');
     if(addr) addr.innerHTML = [s.addressLine1, s.addressLine2, s.addressLine3].filter(Boolean).map(esc).join('<br>');
     const fAddr = document.getElementById('footerAddressLine');
@@ -620,14 +708,85 @@
           '<h3>' + esc(c.name) + '</h3>' +
           '<div class="caravan-specs">' + specs + '</div>' +
           '<p class="blurb">' + esc(c.blurb) + '</p>' +
-          (sold ? '' : '<a href="' + phTel() + '" class="btn btn-enquire">Enquire</a>') +
+          (sold ? '' : '<button type="button" class="btn btn-enquire">Enquire</button>') +
         '</div>';
+      // Photo and "Enquire" both open the same detail view — more photos,
+      // the full description, and an enquiry box that emails us — rather
+      // than trying to dial a phone number from a desktop browser.
+      card.querySelector('.caravan-photo').addEventListener('click', () => openCaravanModal(c));
+      const enquireBtn = card.querySelector('.btn-enquire');
+      if(enquireBtn) enquireBtn.addEventListener('click', () => openCaravanModal(c));
       grid.appendChild(card);
     });
     const forSale = list.filter(c => c.status !== 'sold').length;
     document.getElementById('statForSale').textContent = forSale;
     watchReveals(grid);
   }
+
+  /* ---------- Caravan detail modal ----------
+     Opened from a caravan's photo or its "Enquire" button. Shows every
+     photo for that caravan, the full description, quick call/WhatsApp
+     links, and its own enquiry form (posts to the same place as the main
+     one at the bottom of the page) — so enquiring never means the browser
+     trying to "open" a phone number. */
+  let modalPhotos = [];
+  function renderModalPhoto(i){
+    document.getElementById('cvnModalMainPhoto').src = modalPhotos[i] || '';
+    document.querySelectorAll('#cvnModalThumbs img').forEach((im, idx) => im.classList.toggle('active', idx === i));
+  }
+  function openCaravanModal(c){
+    const sold = c.status === 'sold';
+    document.getElementById('cvnModalName').textContent = c.name;
+    document.getElementById('cvnModalPrice').textContent = sold ? 'SOLD' : gbp(c.price);
+    document.getElementById('cvnModalSpecs').innerHTML = (c.specs || []).map(s => '<span>' + esc(s) + '</span>').join('');
+    document.getElementById('cvnModalBlurb').textContent = c.blurb || '';
+    document.getElementById('cvnModalSubject').value = 'Website enquiry — ' + c.name + ' — Sandy Bay Caravan Park';
+    document.getElementById('cvnModalMessage').value = "I'm interested in the " + c.name + (sold ? '' : ' (' + gbp(c.price) + ')') + '. ';
+    document.getElementById('cvnModalCall').href = phTel();
+    document.getElementById('cvnModalWhatsapp').href = waLink(
+      window.SETTINGS && window.SETTINGS.mobile,
+      "Hi, I'm interested in the " + c.name + " at Sandy Bay Caravan Park."
+    );
+
+    modalPhotos = (c.photos && c.photos.length) ? c.photos : [];
+    const thumbs = document.getElementById('cvnModalThumbs');
+    if(modalPhotos.length > 1){
+      thumbs.innerHTML = modalPhotos.map((p, i) => '<img src="' + esc(p) + '" data-i="' + i + '">').join('');
+      thumbs.querySelectorAll('img').forEach(img => {
+        img.addEventListener('click', () => renderModalPhoto(Number(img.dataset.i)));
+      });
+    } else {
+      thumbs.innerHTML = '';
+    }
+    renderModalPhoto(0);
+
+    const videoWrap = document.getElementById('cvnModalVideoWrap');
+    const videoFrame = document.getElementById('cvnModalVideoFrame');
+    if(c.videoId){
+      videoWrap.style.display = 'block';
+      videoFrame.innerHTML = '<img src="https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg" alt="" style="width:100%;display:block;border-radius:6px;cursor:pointer;" loading="lazy">';
+      videoFrame.onclick = function(){
+        this.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + esc(c.videoId) + '?autoplay=1" title="' + esc(c.name) + ' video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:6px;"></iframe>';
+      };
+    } else {
+      videoWrap.style.display = 'none';
+      videoFrame.innerHTML = '';
+    }
+
+    document.getElementById('cvnModalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCaravanModal(){
+    document.getElementById('cvnModalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('cvnModalClose').addEventListener('click', closeCaravanModal);
+  document.getElementById('cvnModalOverlay').addEventListener('click', (e) => {
+    if(e.target.id === 'cvnModalOverlay') closeCaravanModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeCaravanModal();
+  });
 
   function renderVideos(data){
     const vids = data.videos || [];
