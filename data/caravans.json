@@ -2,22 +2,6 @@
   "updated": "2026-07-25",
   "caravans": [
     {
-      "id": "abi-new-horizon",
-      "name": "ABI New Horizon",
-      "price": 19995,
-      "status": "for-sale",
-      "specs": [
-        "35ft × 12ft",
-        "3 bed",
-        "Sleeps 8"
-      ],
-      "blurb": "Double glazed and centrally heated, with an open-plan lounge, a fully equipped kitchen, and a master plus two twin bedrooms. A solid, spacious starter home.",
-      "photos": [
-        "https://sandybaycaravanpark.github.io/images/caravans/abi-new-horizon/photo_1784559310973_rot.jpg"
-      ],
-      "videoId": ""
-    },
-    {
       "id": "delta-sapphire",
       "name": "Delta Sapphire",
       "price": 19995,
@@ -95,6 +79,25 @@
         "images/caravans/atlas-oasis/photo_1784974513366_2.jpg",
         "images/caravans/atlas-oasis/photo_1784974513611_3.jpg",
         "images/caravans/atlas-oasis/photo_1784974513880_4.jpg"
+      ],
+      "videoId": ""
+    },
+    {
+      "id": "abi-weekender",
+      "name": "ABI Weekender",
+      "price": 11995,
+      "status": "for-sale",
+      "specs": [
+        "ABI Weekender 28 X 10 Two Bed"
+      ],
+      "blurb": "ABI Weekender – 28ft x 10ft – 2 Bedroom\n\nIntroducing the ABI Weekender, a smart and inviting holiday home designed for easy, relaxed breaks away. At 28ft x 10ft with two bedrooms, this model offers a comfortable, no-fuss retreat perfect for couples, small families, or anyone wanting a home from home at Sandy Bay Caravan Park.\n\nKey Features:\n\nCosy open-plan lounge and dining area\nCompact, well-equipped kitchen with integrated appliances\nMaster bedroom with double bed and storage\nSecond bedroom ideal for children, guests, or bunks\nBathroom with shower, WC, and washbasin\nNeat, practical interior finish with comfortable furnishings\n\nWhy the ABI Weekender?\nTrue to its name, the ABI Weekender is built for easy getaways — a compact, well-designed layout that makes the most of every inch. Set within Sandy Bay Caravan Park in Towyn, North Wales, you'll be perfectly placed to enjoy the coast, local amenities, and everything the area has to offer.\n\nReady to view or reserve? Get in touch today to arrange a viewing.",
+      "photos": [
+        "images/caravans/abi-weekender/photo_1784982876878_0.jpg",
+        "images/caravans/abi-weekender/photo_1784982887301_0.jpg",
+        "images/caravans/abi-weekender/photo_1784982899308_0.jpg",
+        "images/caravans/abi-weekender/photo_1784982916960_0.jpg",
+        "images/caravans/abi-weekender/photo_1784982925082_0.jpg",
+        "images/caravans/abi-weekender/photo_1784982933704_0.jpg"
       ],
       "videoId": ""
     }
