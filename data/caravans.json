@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09",
+  "updated": "2026-08-18",
   "caravans": [
     {
       "id": "delta-sapphire",
@@ -23,7 +23,7 @@
       "id": "atlas-moonstone",
       "name": "Atlas Moonstone",
       "price": 21995,
-      "status": "for-sale",
+      "status": "sold",
       "specs": [
         "36ft × 12ft",
         "3 bed"
