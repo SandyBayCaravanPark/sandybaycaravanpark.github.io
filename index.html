@@ -156,8 +156,23 @@
   .caravan-body{ padding:20px 22px 22px; display:flex; flex-direction:column; gap:10px; flex:1; }
   .caravan-body h3{ font-size:20px; }
   .caravan-specs{ display:flex; gap:14px; font-family:'Space Mono',monospace; font-size:12.5px; color:var(--teal-deep); flex-wrap:wrap; }
-  .caravan-body p.blurb{ font-size:14.5px; color:#4B5A5F; margin:0; flex:1; }
+  .caravan-bullets{ margin:0; padding:0; flex:1; }
+  .caravan-bullets li{ font-size:14px; color:#3A4448; padding:4px 0 4px 16px; position:relative; list-style:none; }
+  .caravan-bullets li::before{ content:"—"; position:absolute; left:0; color:var(--gorse); }
   .caravan-body .btn{ align-self:flex-start; margin-top:4px; }
+
+  /* Card photo carousel — flick through a caravan's photos without opening the full listing */
+  .cvn-car-btn{
+    position:absolute; top:50%; transform:translateY(-50%); width:30px; height:30px; border-radius:50%;
+    background:rgba(13,26,32,0.55); color:#fff; border:none; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; z-index:2; font-size:16px; line-height:1; padding:0;
+  }
+  .cvn-car-btn:hover{ background:rgba(13,26,32,0.8); }
+  .cvn-car-prev{ left:8px; }
+  .cvn-car-next{ right:8px; }
+  .cvn-car-dots{ position:absolute; bottom:9px; left:0; right:0; display:flex; justify-content:center; gap:5px; z-index:2; pointer-events:none; }
+  .cvn-car-dots span{ width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.55); display:block; }
+  .cvn-car-dots span.active{ background:#fff; }
   .btn-enquire{ background:var(--navy); color:var(--foam); }
   .btn-enquire:hover{ background:var(--teal-deep); }
   .sale-note{ margin-top:36px; font-size:14.5px; color:rgba(243,237,224,0.75); }
@@ -689,6 +704,20 @@
     scope.querySelectorAll('.reveal').forEach(el=>io2.observe(el));
   }
 
+  // Pulls the "Key Features:" list out of a caravan's long blurb so the
+  // card can show a handful of tidy bullet points instead of the full
+  // wall of text (the full blurb still shows in the detail popup).
+  function extractBullets(blurb, max){
+    if(!blurb) return [];
+    const idx = blurb.indexOf('Key Features:');
+    if(idx === -1) return [];
+    const after = blurb.slice(idx + 'Key Features:'.length);
+    const stopMatch = after.match(/\n\s*\n\s*(Why |Ready to view)/);
+    const block = stopMatch ? after.slice(0, stopMatch.index) : after;
+    const lines = block.split('\n').map(s => s.trim()).filter(Boolean);
+    return lines.slice(0, max || lines.length);
+  }
+
   function renderCaravans(data){
     const grid = document.getElementById('caravanGrid');
     const list = (data.caravans || []).filter(c => c.status !== 'hidden');
@@ -701,26 +730,61 @@
       const card = document.createElement('div');
       card.className = 'caravan-card reveal' + (sold ? ' is-sold' : '');
       const specs = (c.specs || []).map(s => '<span>' + esc(s) + '</span>').join('');
-      const photo = c.photos && c.photos.length ? c.photos[0] : '';
+      const bullets = extractBullets(c.blurb, 4).map(b => '<li>' + esc(b) + '</li>').join('');
+      const photos = (c.photos && c.photos.length) ? c.photos : [];
+      const photo = photos[0] || '';
+      const hasCarousel = photos.length > 1;
       card.innerHTML =
         '<div class="caravan-photo">' +
           (photo ? '<img src="' + esc(photo) + '" alt="' + esc(c.name) + ' static caravan" loading="lazy">' : '') +
           (sold ? '<div class="sold-tag">SOLD</div>'
                 : '<div class="price-tag">' + gbp(c.price) + '<span class="hole"></span></div>') +
           (c.videoId ? '<span class="video-badge">▶ Video tour</span>' : '') +
+          (hasCarousel ?
+            '<button type="button" class="cvn-car-btn cvn-car-prev" aria-label="Previous photo">‹</button>' +
+            '<button type="button" class="cvn-car-btn cvn-car-next" aria-label="Next photo">›</button>' +
+            '<div class="cvn-car-dots">' + photos.map((_, i) => '<span' + (i === 0 ? ' class="active"' : '') + '></span>').join('') + '</div>'
+          : '') +
         '</div>' +
         '<div class="caravan-body">' +
           '<h3>' + esc(c.name) + '</h3>' +
           '<div class="caravan-specs">' + specs + '</div>' +
-          '<p class="blurb">' + esc(c.blurb) + '</p>' +
+          (bullets ? '<ul class="caravan-bullets">' + bullets + '</ul>' : '') +
           (sold ? '' : '<button type="button" class="btn btn-enquire">Enquire</button>') +
         '</div>';
-      // Photo and "Enquire" both open the same detail view — more photos,
-      // the full description, and an enquiry box that emails us — rather
-      // than trying to dial a phone number from a desktop browser.
+      // Clicking the photo (but not the carousel arrows) or "Enquire" opens
+      // the full detail view — every photo, the full description, and an
+      // enquiry box that emails us — rather than trying to dial a phone
+      // number from a desktop browser.
       card.querySelector('.caravan-photo').addEventListener('click', () => openCaravanModal(c));
       const enquireBtn = card.querySelector('.btn-enquire');
       if(enquireBtn) enquireBtn.addEventListener('click', () => openCaravanModal(c));
+
+      // Flick through this caravan's photos right on the card — arrow
+      // buttons for mouse/click, and a swipe gesture for touch — without
+      // opening the full listing.
+      if(hasCarousel){
+        let idx = 0;
+        const photoEl = card.querySelector('.caravan-photo');
+        const imgEl = photoEl.querySelector('img');
+        const dots = card.querySelectorAll('.cvn-car-dots span');
+        const show = (i) => {
+          idx = (i + photos.length) % photos.length;
+          imgEl.src = photos[idx];
+          dots.forEach((d, di) => d.classList.toggle('active', di === idx));
+        };
+        card.querySelector('.cvn-car-prev').addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
+        card.querySelector('.cvn-car-next').addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
+        let touchX = null;
+        photoEl.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+        photoEl.addEventListener('touchend', (e) => {
+          if(touchX === null) return;
+          const dx = e.changedTouches[0].clientX - touchX;
+          if(Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
+          touchX = null;
+        }, { passive: true });
+      }
+
       grid.appendChild(card);
     });
     const forSale = list.filter(c => c.status !== 'sold').length;
