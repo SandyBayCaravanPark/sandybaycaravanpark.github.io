@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26",
+  "updated": "2026-09-05",
   "caravans": [
     {
       "id": "delta-sapphire",
@@ -161,6 +161,24 @@
         "images/caravans/abi-weekender/photo_1784982916960_0.jpg",
         "images/caravans/abi-weekender/photo_1784982925082_0.jpg",
         "images/caravans/abi-weekender/photo_1784982933704_0.jpg"
+      ],
+      "videoId": ""
+    },
+    {
+      "id": "abi-new-horizon",
+      "name": "ABI New Horizon",
+      "price": 19995,
+      "status": "for-sale",
+      "specs": [
+        "3 bedrooms  · 35ft x 12ft ·"
+      ],
+      "blurb": "A bright, open-plan holiday home that makes the most of every inch. The lounge, dining and kitchen area is designed to catch the light, with fixed L-shaped seating and a pull-out sofa-bed that takes sleeping capacity up to eight — ideal for family holidays or letting out during the season.\n\nThree well-proportioned bedrooms — a master plus two twins — come with built-in wardrobes and plenty of storage, and two separate bathrooms mean no queuing on busy mornings. The galley kitchen comes fully equipped with an oven, hob and fridge, so you're set up from day one.\n\nDouble glazing and blow-air heating keep it comfortable well beyond the summer months, and it's sited at Sandy Bay Caravan Park in Towyn — a short walk from the beach, with the rest of the park on your doorstep.",
+      "photos": [
+        "images/caravans/abi-new-horizon/photo_1788610525572_0.jpg",
+        "images/caravans/abi-new-horizon/photo_1788610525859_1.jpg",
+        "images/caravans/abi-new-horizon/photo_1788610526052_2.jpg",
+        "images/caravans/abi-new-horizon/photo_1788610526350_3.jpg",
+        "images/caravans/abi-new-horizon/photo_1788610526534_4.jpg"
       ],
       "videoId": ""
     }
